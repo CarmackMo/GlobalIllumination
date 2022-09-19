@@ -1,6 +1,6 @@
-#Global Illumination
+# Global Illumination
 
-##Introduction
+## Introduction
 
 This is a simple global illuminator developed based on the principle of ray tracing technology with C/C++. 
 
