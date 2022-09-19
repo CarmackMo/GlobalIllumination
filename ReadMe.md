@@ -2,9 +2,9 @@
 
 ## Introduction
 
-This is a simple global illuminator developed based on the principle of ray tracing technology with C/C++. 
+This is a simple global illuminator developed based on the principle of ray tracing technology with C/C++. I used *Lanbert* equation as the ray tracing model of this illuminator.
 
-The outcome of the global illumination can be seen in the following image:
+The outcome of the global illumination can be seen in the following image. The sphere on the right-top corner and the two spheres on the right-down corner use smooth material, while the rest of the spheres use rough material.
 
 ![Outcome](./Outcome.jpg)
 
