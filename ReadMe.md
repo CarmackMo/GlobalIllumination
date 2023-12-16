@@ -29,6 +29,8 @@ The outcome of the global illumination can be seen in the following image. There
 
 + [Ray Reflection](#RayReflection)
 
++ [Shading Model](#ShadingModel)
+
 
 
 
@@ -172,3 +174,28 @@ The third axis needs to be perpendicular to both the first and second axes, and 
 $$\vec{v} = \vec{n} \times \vec{u}$$
 
 Finally, as all three axes are unit vectors, the randomly generated reflected ray can be determined by randomly setting the extent of the ray along each axis.
+
+
+
+
+
+
+<br></br>
+<a id="ShadingModel"></a>
+
+# Shading Model
+
+Merely calculating the intersection of rays with objects is insufficient for rendering a complete image; it is also necessary to color the image based on the objects' colors. This process requires establishing a shading model.
+
+The simplest shading model was proposed in the 18th century by Lambert, based on everyday observations. He suggested that the amount of light gathered on a unit area of a surface depends on the angle at which light enters the surface. From this observation, Lambert developed the **Lambertian shading model**:
+
+$$L = k_d*I*max(0, \ \vec{n} \cdot \vec{l})   \tag{7}$$
+
+Here, $k_d$ is the diffuse reflection coefficient, $I$ represents the light source, $\vec{n}$ and $\vec{l}$ are the normal vector of the surface and the direction of the reflected light, respectively (in ray tracing, the direction of the reflected light represents the direction of light emitted from the source). $L$ is the color of the current pixel, which can be a scalar or a vector (if using a three-channel vector to represent RGB color).
+
+However, the illumination model depicted by this method is quite rudimentary, producing almost uniform color across an object without highlights or variations in light and shadow. To address this, Phong and Blinn proposed in 1975 that the closer the angle bisector of the incident and reflected rays is to the normal of the surface, the more light the surface reflects. Therefore, based on the Lambertian model, the **Phong-Blinn shading model** evolved:
+
+$$L = k_d*I*max(0, \ \vec{n} \cdot \vec{l}) + k_s*I*max(0, \ \vec{n} \cdot \vec{h})^p   \tag{8}$$ 
+$$\vec{h} = (\vec{v} \cdot \vec{l})/\Vert\vec{v}+\vec{l}\Vert$$
+
+Here, $k_s$ is the specular reflection coefficient, $\vec{h}$ is the bisector of the angles of the incident and reflected rays, and $p$ is the Phong exponent, which controls the amount of reflected light and must be greater than 1. The smaller the value of $p$, the closer the reflection mechanism is to diffuse reflection; the larger the value of $p$, the closer it is to specular reflection.
