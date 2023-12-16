@@ -58,7 +58,7 @@ for each pixel do :
 
 And the flowchat of the ray tracing process is like:
 
-<img src="./Documents/Images/RayTracing.png" width="750px" >
+<p align="center"><img src="./Documents/Images/RayTracing.png" width="750px" ></p>
 
 
 
@@ -81,6 +81,6 @@ In the field of computer graphics, there are primarily two types of viewpoints: 
 
 In contrast, the Perspective View is more akin to human eye imaging. All initial rays originate from a single point, often referred to as the **Viewing Point**. The imaging surface is located in front of the Viewing Point, and all initial rays emanate from this point, passing through their respective pixels on the imaging surface. Therefore, in a Perspective View, the directions of the rays are varied and radiate outward. The differences in the initial rays between these two viewpoints can be seen in the comparison illustrated below:
 
-<img src="./Documents/Images/OrthographicAndPerspective.png" width="750px" >
+<p align="center"><img src="./Documents/Images/OrthographicAndPerspective.png" width="750px" > </p>
 
-<center><font size=3 color=grey>Figure 2: Orthographic view and perspective view </font></center>
+<p align="center"> <font size=3 color=grey>Figure 2: Orthographic view and perspective view </font></p>
