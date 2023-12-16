@@ -25,6 +25,7 @@ The outcome of the global illumination can be seen in the following image. There
 
 + [Initialize Ray](#InitializeRay)
 
++ []
 
 
 
@@ -58,7 +59,7 @@ for each pixel do :
 
 And the flowchat of the ray tracing process is like:
 
-<p align="center"><img src="./Documents/Images/RayTracing.png" width="750px" ></p>
+<p align="center"> <img src="./Documents/Images/RayTracing.png" width="750px" > </p>
 
 
 
@@ -81,6 +82,20 @@ In the field of computer graphics, there are primarily two types of viewpoints: 
 
 In contrast, the Perspective View is more akin to human eye imaging. All initial rays originate from a single point, often referred to as the **Viewing Point**. The imaging surface is located in front of the Viewing Point, and all initial rays emanate from this point, passing through their respective pixels on the imaging surface. Therefore, in a Perspective View, the directions of the rays are varied and radiate outward. The differences in the initial rays between these two viewpoints can be seen in the comparison illustrated below:
 
-<p align="center"><img src="./Documents/Images/OrthographicAndPerspective.png" width="750px" > </p>
+<p align="center"> <img src="./Documents/Images/OrthographicAndPerspective.png" width="750px" > </p>
 
-<p align="center"> <font size=3 color=grey>Figure 2: Orthographic view and perspective view </font></p>
+<p align="center"> <font size=3 color=grey>Figure 2: Orthographic view and perspective view </font> </p>
+
+Hence, for any given pixel point $\vec{p}=(x,y,z)$, the initial ray in an Orthographic View can be expressed as:
+
+$$ray.position = \vec{p}$$
+$$ray.direction = -\vec{w} \tag{2}$$
+
+In a Perspective View, the initial ray can be expressed as:
+
+$$ray.position = \vec{e}$$ 
+$$ray.direction = -d*\vec{w} \ + \ x*\vec{u} \ + \ y*\vec{v}$$
+
+Where $\vec{p}$ represents the three-dimensional coordinates of the pixel point, and $\vec{u}, \ \vec{v}, \ \vec{w}$ are unit vectors representing right, up, and outward directions based on the coordinate system established by the imaging surface. $\vec{e}$ is the three-dimensional coordinate of the viewing point, and $d$ is the distance from the viewing point to the imaging surface.
+
+For ease of calculation, the algorithm in this project adopts the Orthographic View.
