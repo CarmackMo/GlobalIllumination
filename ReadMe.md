@@ -23,6 +23,7 @@ The outcome of the global illumination can be seen in the following image. There
 
 + [Ray Tracing Basic](#RayTracing)
 
++ [Initialize Ray](#InitializeRay)
 
 
 
@@ -55,7 +56,20 @@ for each pixel do :
         set shading color to background color
 ```
 
-
 And the flowchat of the ray tracing process is like:
 
 <img src="./Documents/Images/RayTracing.png" width="750px" >
+
+
+
+
+
+<br></br>
+<a id="InitializeRay"></a>
+
+# Initialize Ray
+
+
+To generate rays, a mathematical representation of the ray is essential. A ray is a directed line originating from a light source. Based on this principle, any ray in mathematics can be represented by its origin point and direction of propagation. The following formula can be derived:
+
+$$\vec{P(t)} = \vec{e} + t \cdot \vec{d}  \qquad  t\in(0,\infty) \tag{1}$$
