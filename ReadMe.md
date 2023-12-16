@@ -140,7 +140,7 @@ Further simplification yields:
 
 $$(\vec{d} \cdot \vec{d})*t^2 + (\vec{e}-\vec{C}) \cdot \vec{d}*2t + (\vec{e}-\vec{C}) \cdot (\vec{e}-\vec{C}) - R^2 = 0  \tag{5}$$
 
-This expression is a quadratic equation in terms of $t$, where “$\cdot$” denotes the dot product and “$*$” denotes scalar multiplication. The coefficients $a$, $b$, and $c$ of the quadratic equation are respectively:
+This expression is a quadratic equation in terms of $t$, where “$`\cdot`$” denotes the dot product and “$`*`$” denotes scalar multiplication. The coefficients $a$, $b$, and $c$ of the quadratic equation are respectively:
 
 $$a = (\vec{d} \cdot \vec{d})$$
 
