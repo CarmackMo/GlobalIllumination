@@ -27,6 +27,8 @@ The outcome of the global illumination can be seen in the following image. There
 
 + [Ray Intersection](#RayIntersection)
 
++ [Ray Reflection](#RayReflection)
+
 
 
 
@@ -84,8 +86,7 @@ In the field of computer graphics, there are primarily two types of viewpoints: 
 In contrast, the Perspective View is more akin to human eye imaging. All initial rays originate from a single point, often referred to as the **Viewing Point**. The imaging surface is located in front of the Viewing Point, and all initial rays emanate from this point, passing through their respective pixels on the imaging surface. Therefore, in a Perspective View, the directions of the rays are varied and radiate outward. The differences in the initial rays between these two viewpoints can be seen in the comparison illustrated below:
 
 <p align="center"> <img src="./Documents/Images/OrthographicAndPerspective.png" width="750px" > </p>
-
-<p align="center"> <font size=3 color=grey>Figure 2: Orthographic view and perspective view </font> </p>
+<p align="center"> <font size=3 color=grey>Figure 2: orthographic view and perspective view </font> </p>
 
 Hence, for any given pixel point $\vec{p}=(x,y,z)$, the initial ray in an Orthographic View can be expressed as:
 
@@ -139,3 +140,35 @@ $$b =  (\vec{e}-\vec{C}) \cdot \vec{d}*2$$
 $$ c = (\vec{e}-\vec{C}) \cdot (\vec{e}-\vec{C}) - R^2$$
 
 The solutions for $t$ obtained from this equation represent the distance from the ray's origin to the intersection point. It's important to note that $t$ cannot be negative (a negative value implies that the ray is emanating in the opposite direction, contradicting $\vec{d}$), and its value should also be bounded within a certain range, not extending to positive infinity. Finally, the smaller value of $t$ should be chosen, as a ray passing through a sphere will have two intersection points. Only the one closer to the ray's origin represents the actual intersection point.
+
+
+
+
+
+<br></br>
+<a id="RayReflection"></a>
+
+# Ray Reflection
+
+After the initial ray intersects with an object, it doesn’t simply stop. Instead, it undergoes reflection or refraction based on the material properties of the object. 
+
+There are two types of reflections: **specular** (mirror-like) and **diffuse**. Specular reflection is relatively straightforward: when a ray intersects an object at a certain angle, the reflected ray exits at the same angle. As illustrated below, to find the direction of the reflected ray, $\vec{PR}$, we can use $\vec{PX}+\vec{XR}$. Here, $\vec{PX}$ is derived from the incident ray’s direction $\vec{DP}$, and $\vec{PN}$ is the surface's normal vector.
+
+$$\vec{XR} = 2(\vec{PD}*\cos{\theta}) = 2(-\vec{DP}*\cos{\theta}) = -2(\vec{DP} \cdot \vec{PN})/(\vert\vec{DP}\vert*\vert\vec{PN}\vert)$$
+
+Since $\vec{DP}, \ \vec{PN}, \ \vec{PR}$ are all unit vectors, the direction of the reflected ray can be determined as:
+
+$$\vec{PR}=\vec{DP}-2(\vec{DP} \cdot \vec{PN})   \tag{6}$$
+
+<p align="center"> <img src="./Documents/Images/RayReflection.png"> </p>
+<p align="center"> <font size=3 color=grey> Figure 3: schematic of specular eeflection </font> </p>
+
+The primary difference between diffuse and specular reflections is that the angles of incidence and reflection are not the same for diffuse reflections. As a result, in ray tracing algorithms, the direction of the reflected ray is typically generated randomly. To randomly generate the outgoing ray, we first need to establish an orthogonal coordinate system for it. The normal vector of the plane, $\vec{n}$, serves as the first axis of this coordinate system. The second axis, which should be perpendicular to the normal vector, can be obtained by crossing a unit vector with the normal vector:
+
+$$\vec{u} = \vec{n} \times \vec{vec}$$
+
+The third axis needs to be perpendicular to both the first and second axes, and can therefore be obtained by crossing the first and second axes:
+
+$$\vec{v} = \vec{n} \times \vec{u}$$
+
+Finally, as all three axes are unit vectors, the randomly generated reflected ray can be determined by randomly setting the extent of the ray along each axis.
