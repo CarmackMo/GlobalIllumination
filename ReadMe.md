@@ -140,7 +140,7 @@ Further simplification yields:
 
 $$(\vec{d} \cdot \vec{d})*t^2 + (\vec{e}-\vec{C}) \cdot \vec{d}*2t + (\vec{e}-\vec{C}) \cdot (\vec{e}-\vec{C}) - R^2 = 0  \tag{5}$$
 
-This expression is a quadratic equation in terms of $t$, where “$ \cdot $” denotes the dot product and “$ * $” denotes scalar multiplication. The coefficients $a$, $b$, and $c$ of the quadratic equation are respectively:
+This expression is a quadratic equation in terms of $t$, where “$\cdot$” denotes the dot product and “$*$” denotes scalar multiplication. The coefficients $a$, $b$, and $c$ of the quadratic equation are respectively:
 
 $$a = (\vec{d} \cdot \vec{d})$$
 
@@ -163,7 +163,7 @@ After the initial ray intersects with an object, it doesn’t simply stop. Inste
 
 There are two types of reflections: **specular** (mirror-like) and **diffuse**. Specular reflection is relatively straightforward: when a ray intersects an object at a certain angle, the reflected ray exits at the same angle. As illustrated below, to find the direction of the reflected ray, $\vec{PR}$, we can use $\vec{PX}+\vec{XR}$. Here, $\vec{PX}$ is derived from the incident ray’s direction $\vec{DP}$, and $\vec{PN}$ is the surface's normal vector.
 
-$$\vec{XR} = 2(\vec{PD}*\cos{\theta}) = 2(-\vec{DP}*\cos{\theta}) = -2(\vec{DP} \cdot \vec{PN})/(\vert\vec{DP}\vert*\vert\vec{PN}\vert)$$
+$$\vec{XR} = 2(\vec{PD} * \cos{\theta}) = 2(-\vec{DP} * \cos{\theta}) = -2(\vec{DP} \cdot \vec{PN})/(\vert\vec{DP}\vert * \vert\vec{PN}\vert)$$
 
 Since $\vec{DP}, \ \vec{PN}, \ \vec{PR}$ are all unit vectors, the direction of the reflected ray can be determined as:
 
@@ -196,13 +196,13 @@ Merely calculating the intersection of rays with objects is insufficient for ren
 
 The simplest shading model was proposed in the 18th century by Lambert, based on everyday observations. He suggested that the amount of light gathered on a unit area of a surface depends on the angle at which light enters the surface. From this observation, Lambert developed the **Lambertian shading model**:
 
-$$L = k_d*I*max(0, \vec{n} \cdot \vec{l}) \tag{7}$$
+$$L = k_d * I * max(0, \vec{n} \cdot \vec{l}) \tag{7}$$
 
 Here, $k_d$ is the diffuse reflection coefficient, $I$ represents the light source, $\vec{n}$ and $\vec{l}$ are the normal vector of the surface and the direction of the reflected light, respectively (in ray tracing, the direction of the reflected light represents the direction of light emitted from the source). $L$ is the color of the current pixel, which can be a scalar or a vector (if using a three-channel vector to represent RGB color).
 
 However, the illumination model depicted by this method is quite rudimentary, producing almost uniform color across an object without highlights or variations in light and shadow. To address this, Phong and Blinn proposed in 1975 that the closer the angle bisector of the incident and reflected rays is to the normal of the surface, the more light the surface reflects. Therefore, based on the Lambertian model, the **Phong-Blinn shading model** evolved:
 
-$$L = k_d*I*max(0, \vec{n} \cdot \vec{l}) + k_s*I*max(0, \vec{n} \cdot \vec{h})^p \tag{8}$$ 
+$$L = k_d * I * max(0, \vec{n} \cdot \vec{l}) + k_s * I * max(0, \vec{n} \cdot \vec{h})^p \tag{8}$$ 
 
 $$\vec{h} = (\vec{v} \cdot \vec{l})/\Vert\vec{v}+\vec{l}\Vert$$
 
