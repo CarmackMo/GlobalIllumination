@@ -25,7 +25,8 @@ The outcome of the global illumination can be seen in the following image. There
 
 + [Initialize Ray](#InitializeRay)
 
-+ []
++ [Ray Intersection](#RayIntersection)
+
 
 
 
@@ -99,3 +100,42 @@ $$ray.direction = -d*\vec{w} \ + \ x*\vec{u} \ + \ y*\vec{v}$$
 Where $\vec{p}$ represents the three-dimensional coordinates of the pixel point, and $\vec{u}, \ \vec{v}, \ \vec{w}$ are unit vectors representing right, up, and outward directions based on the coordinate system established by the imaging surface. $\vec{e}$ is the three-dimensional coordinate of the viewing point, and $d$ is the distance from the viewing point to the imaging surface.
 
 For ease of calculation, the algorithm in this project adopts the Orthographic View.
+
+
+
+
+
+<br></br>
+<a id="RayIntersection"></a>
+
+# Ray Intersection
+
+A second key issue to address in ray tracing is determining whether the ray intersects with any objects in space. Similarly, we need to establish a mathematical expression for objects in three-dimensional space to facilitate further calculations.
+
+In the current field of computer graphics, the handling of ray-object intersections is primarily focused on spheres and triangular faces. The choice of spheres is straightforward, but why triangular faces? Triangular faces are the most lightweight mathematical representation of three-dimensional planes, as any polyhedral surface can be composed of several triangular faces. By extension, any object in three-dimensional space (including spheres) can be constructed from multiple triangular faces. Thus, by combining triangular faces, we can represent any object in space.
+
+However, some detailed models can consist of thousands, or even tens of thousands, of triangular faces. Ray tracing such an object would consume a significant amount of time and computational power. For simplification purposes, the algorithm discussed in this project only involves the intersection of rays with spheres.
+
+If the center of the sphere $C$ is known, with coordinates $(x_c, \ y_c, \ z_c)$, and the radius of the sphere is $R$, then the coordinates of any point $P$ on the sphere can be represented by the following formula:
+
+$$(x-x_c)^2 \ + \ (y-y_c)^2 \ + \ (z-z_c)^2 = R^2$$
+
+or direct vector expression:
+
+$$(\vec{P}-\vec{C}) \cdot (\vec{P}-\vec{C}) = R^2  \tag{3}$$
+
+All points on the surface of a sphere collectively constitute the sphere itself. The intersection of a ray with a sphere is, in fact, the intersection of the ray with a specific point on the sphere. From the previous section, we have obtained the expression for a ray. Substituting Equation (1) into Equation (3), we derive the expression for the intersection point as:
+
+$$(\vec{e} + t \cdot \vec{d}-\vec{C}) \cdot (\vec{e} + t \cdot \vec{d}-\vec{C}) - R^2 = 0   \tag{4}$$
+
+Further simplification yields:
+
+$$(\vec{d} \cdot \vec{d})*t^2 + (\vec{e}-\vec{C}) \cdot \vec{d}*2t + (\vec{e}-\vec{C}) \cdot (\vec{e}-\vec{C}) - R^2 = 0  \tag{5}$$
+
+This expression is a quadratic equation in terms of $t$, where “$\cdot$” denotes the dot product and “$*$” denotes scalar multiplication. The coefficients $a$, $b$, and $c$ of the quadratic equation are respectively:
+
+$$a = (\vec{d} \cdot \vec{d})$$
+$$b =  (\vec{e}-\vec{C}) \cdot \vec{d}*2$$
+$$ c = (\vec{e}-\vec{C}) \cdot (\vec{e}-\vec{C}) - R^2$$
+
+The solutions for $t$ obtained from this equation represent the distance from the ray's origin to the intersection point. It's important to note that $t$ cannot be negative (a negative value implies that the ray is emanating in the opposite direction, contradicting $\vec{d}$), and its value should also be bounded within a certain range, not extending to positive infinity. Finally, the smaller value of $t$ should be chosen, as a ray passing through a sphere will have two intersection points. Only the one closer to the ray's origin represents the actual intersection point.
