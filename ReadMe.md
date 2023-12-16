@@ -69,7 +69,18 @@ And the flowchat of the ray tracing process is like:
 
 # Initialize Ray
 
-
 To generate rays, a mathematical representation of the ray is essential. A ray is a directed line originating from a light source. Based on this principle, any ray in mathematics can be represented by its origin point and direction of propagation. The following formula can be derived:
 
 $$\vec{P(t)} = \vec{e} + t \cdot \vec{d}  \qquad  t\in(0,\infty) \tag{1}$$
+
+Where $\vec{e}$ is the three-dimensional coordinate of the ray's origin, $\vec{d}$ is the direction vector of the ray, and $t$ is a scalar representing the distance from the origin point along the direction $\vec{d}$. This formula represents a point on the path of the ray at a distance $t$ from the origin, and the total collection of all such points along the path constitutes the ray itself.
+
+With the mathematical expression for a ray established, we can then calculate the initial position and direction of the ray. However, these values are not arbitrarily set; determining them involves another crucial aspect - the issue of viewpoint.
+
+In the field of computer graphics, there are primarily two types of viewpoints: **Orthographic View** (also known as Parallel View) and **Perspective View**. In an Orthographic View, the imaging of objects is mapped onto corresponding pixels in a way that is perpendicular to the imaging surface. Therefore, all initial rays have the same direction perpendicular to the imaging surface, with their origins at their respective pixels on the imaging surface.
+
+In contrast, the Perspective View is more akin to human eye imaging. All initial rays originate from a single point, often referred to as the **Viewing Point**. The imaging surface is located in front of the Viewing Point, and all initial rays emanate from this point, passing through their respective pixels on the imaging surface. Therefore, in a Perspective View, the directions of the rays are varied and radiate outward. The differences in the initial rays between these two viewpoints can be seen in the comparison illustrated below:
+
+<img src="./Documents/Images/OrthographicAndPerspective.png" width="750px" >
+
+<center><font size=3 color=grey>Figure 2: Orthographic view and perspective view </font></center>
