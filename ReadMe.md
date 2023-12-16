@@ -12,7 +12,7 @@ Read this in other languages:
 
 The outcome of the global illumination can be seen in the following image. There are five spheres in a closed room (The wall that at the same position of users' screen has no color). The light source is at the top of the room. The sphere on the right-top corner and the two spheres on the right-down corner use smooth material, while the rest of the spheres use rough material.
 
-![Outcome](./Outcome.jpg)
+<p align="center"> <img src="./Documents/Images/Result.png" width="700px" > </p>
 
 
 
@@ -30,6 +30,9 @@ The outcome of the global illumination can be seen in the following image. There
 + [Ray Reflection](#RayReflection)
 
 + [Shading Model](#ShadingModel)
+
++ [Demos](#Demos)
+
 
 
 
@@ -189,13 +192,64 @@ Merely calculating the intersection of rays with objects is insufficient for ren
 
 The simplest shading model was proposed in the 18th century by Lambert, based on everyday observations. He suggested that the amount of light gathered on a unit area of a surface depends on the angle at which light enters the surface. From this observation, Lambert developed the **Lambertian shading model**:
 
-$$L = k_d*I*max(0, \ \vec{n} \cdot \vec{l})   \tag{7}$$
+$$L = k_d*I*max(0, \vec{n} \cdot \vec{l})   \tag{7}$$
 
 Here, $k_d$ is the diffuse reflection coefficient, $I$ represents the light source, $\vec{n}$ and $\vec{l}$ are the normal vector of the surface and the direction of the reflected light, respectively (in ray tracing, the direction of the reflected light represents the direction of light emitted from the source). $L$ is the color of the current pixel, which can be a scalar or a vector (if using a three-channel vector to represent RGB color).
 
 However, the illumination model depicted by this method is quite rudimentary, producing almost uniform color across an object without highlights or variations in light and shadow. To address this, Phong and Blinn proposed in 1975 that the closer the angle bisector of the incident and reflected rays is to the normal of the surface, the more light the surface reflects. Therefore, based on the Lambertian model, the **Phong-Blinn shading model** evolved:
 
-$$L = k_d*I*max(0, \ \vec{n} \cdot \vec{l}) + k_s*I*max(0, \ \vec{n} \cdot \vec{h})^p   \tag{8}$$ 
+$$L = k_d*I*max(0, \vec{n} \cdot \vec{l}) + k_s*I*max(0, \vec{n} \cdot \vec{h})^p   \tag{8}$$ 
 $$\vec{h} = (\vec{v} \cdot \vec{l})/\Vert\vec{v}+\vec{l}\Vert$$
 
 Here, $k_s$ is the specular reflection coefficient, $\vec{h}$ is the bisector of the angles of the incident and reflected rays, and $p$ is the Phong exponent, which controls the amount of reflected light and must be greater than 1. The smaller the value of $p$, the closer the reflection mechanism is to diffuse reflection; the larger the value of $p$, the closer it is to specular reflection.
+
+
+
+
+
+<br></br>
+<a id="Demos"></a>
+
+# Demos
+
+<p align="center"> <img src="./Documents/Images/Result.png" > </p>
+<p align="center"> <font size=3 color=grey> Figure 4: Final Result </font> </p>
+
+Among the result image, spheres 1, 2, and 3 are specular material, and spheres 4 and 5 are diffuse material.
+
+<p align="center"> <img src="./Documents/Images/ResultDetail1.png" width="570px" > </p>
+<br>
+
+It is evident that the sphere with a specular material reflects the light source located at the top very well. Upon closer inspection, reflections of other spheres can also be observed.
+
+If we closely observe Sphere 2, the spots indicated by the red arrow are reflections of Sphere 1. The highlights pointed out by the yellow arrow are reflections of the highlights from Sphere 3 on Sphere 2. The dark spot marked by the blue arrow is due to its facing towards the front wall, which is colored black, hence creating a black spot on Sphere 2.
+
+<p align="center"> <img src="./Documents/Images/ResultDetail2.png" width="570px" > </p>
+<br>
+
+Upon closely observing Sphere 3, the spot indicated by the red arrow is the reflection of Sphere 1. The spot pointed out by the yellow arrow is the reflection of Sphere 5. Meanwhile, the spot marked by the blue arrow is the reflection of Sphere 2.
+
+<p align="center"> <img src="./Documents/Images/ResultDetail3.png" width="570px" > </p>
+<br>
+
+We can also observe that Sphere 4, being closer to the light source than Sphere 5, appears brighter than Sphere 5.
+
+Overall, this algorithm effectively implements the basic functions of ray tracing. With increased sampling, additional recursion layers, and expanded imaging area, along with further upgrades to the shading model, even better rendering results can be achieved.
+
+To further improve from an algorithmic perspective, the Monte Carlo method for ray tracing should be employed. This is a widely used ray tracing algorithm capable of rendering global illumination scenes with greater accuracy. I plan to further research in this direction in the future.
+
+The only shortcoming in the current rendering is that, according to the original algorithm settings, the generated image should be in full RGB color. However, for some unknown reason, the final PPM file, when converted to a PNG image, lost all color data and only retained black and white. Resolving this issue would better allow us to analyze whether the algorithm can accurately depict the scene as it is and evaluate the strengths and weaknesses of the algorithm itself.
+
+
+
+
+
+<br></br>
+
+# Reference
+
+Peter, S., Steve, 	M. (2009). *Fundamentals of Computer Graphics (3rd Edition)* 
+
+Kevin, B. (2010). *[Smallpt: Global Illumination in 99 lines of C++](http://www.kevinbeason.com/smallpt/)*. Retrieved from: http://www.kevinbeason.com/smallpt/
+
+Eric, Y. personal communication. May, 28, 2021 
